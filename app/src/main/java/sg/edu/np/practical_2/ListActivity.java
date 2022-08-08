@@ -19,6 +19,7 @@ public class ListActivity extends AppCompatActivity implements OnNoteListener {
     ArrayList<User> userList;
     RecyclerView recyclerView;
     User select;
+    MyDBHandler myDBHandler = new MyDBHandler(this,"userDB.db", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,9 @@ public class ListActivity extends AppCompatActivity implements OnNoteListener {
             userList.add(u);
         }
 
-        recyclerAdapter adapter = new recyclerAdapter(userList, this);
+        myDBHandler.addUsers(userList);
+
+        recyclerAdapter adapter = new recyclerAdapter(myDBHandler.getUsers(), this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

@@ -6,6 +6,8 @@ public class User {
     public int Id;
     public boolean Followed;
 
+    public User() {}
+
     public User(String n, String desc, int id, boolean f){
         this.Name = n;
         this.Description = desc;
