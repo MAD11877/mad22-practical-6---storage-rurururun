@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     final String[] condition = {"UNFOLLOW", "FOLLOW"};
     User u;
+    MyDBHandler myDBHandler = new MyDBHandler(this,"userDB.db",null,1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +47,14 @@ public class MainActivity extends AppCompatActivity {
                 if(!u.Followed) {
                     myButton.setText(condition[0]);
                     u.Followed = true;
+                    myDBHandler.updateUser(u);
 
                     Toast.makeText(getApplicationContext(), "Followed", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     myButton.setText(condition[1]);
                     u.Followed = false;
+                    myDBHandler.updateUser(u);
 
                     Toast.makeText(getApplicationContext(), "Unfollowed", Toast.LENGTH_SHORT).show();
                 }
